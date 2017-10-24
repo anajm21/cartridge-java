@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Unit & Mutation Test') {
             steps {
-				sh "mvn clean install -DskipTests"
+				sh "mvn test"
             }
         }
         stage('Code Inspection') {
