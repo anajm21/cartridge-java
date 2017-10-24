@@ -5,13 +5,12 @@ pipeline {
         PROJECT_NAME = 'hola'
     }
     stages {
+		tools {
+			maven 'M3'
+		}
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
-				
-				tools {
-					maven 'M3'
-				}
             }
         }
         stage('Unit & Mutation Test') {
