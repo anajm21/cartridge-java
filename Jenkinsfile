@@ -7,7 +7,7 @@ pipeline {
 	
 	tools {
 		maven 'M3'
-		sh "mvn clean install -DskipTests"				
+		maven "clean install -DskipTests"				
 	}
     stages {
 		
