@@ -6,8 +6,9 @@ pipeline {
     }
 	
 	tools {
-			maven 'M3'
-		}
+		maven 'M3'
+		sh 'clean install -DskipTests'				
+	}
     stages {
 		
         stage('Build & Package') {
