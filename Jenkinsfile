@@ -2,7 +2,9 @@ pipeline {
     agent any
 	environment {
         WORKSPACE_NAME = 'ana'
-        PROJECT_NAME = 'hola'
+        PROJECT_NAME = 'projectFolderName'
+        PROJECT_NAME_KEY = 'projectNameKey'
+    }
     }
 	tools {
 		maven 'M3'		
@@ -21,7 +23,15 @@ pipeline {
         }
         stage('Code Inspection') {
             steps {
-                echo 'Deploying....'
+                withSonarQubeEnv('sonar_ana') {
+				properties('''sonar.projectKey=PROJECT_NAME_KEY
+				sonar.projectName=PROJECT_NAME
+				sonar.projectVersion=6.2
+				sonar.language=java
+				sonar.scm.enabled=false''')
+    
+				}
+
             }
         }
 		stage('Provision & Deploy to Test') {
