@@ -5,7 +5,7 @@ pipeline {
         PROJECT_NAME = 'projectFolderName'
         PROJECT_NAME_KEY = 'projectNameKey'
     }
-    }
+
 	tools {
 		maven 'M3'		
 	}
