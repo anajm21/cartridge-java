@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Unit & Mutation Test') {
             steps {
-				sh "mvn test"
+				sh "mvn surefire:test"
             }
         }
         stage('Code Inspection') {
