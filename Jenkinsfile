@@ -8,9 +8,17 @@ pipeline {
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
-				node ('master')
-				step([$class: 'CopyArtifact', fingerprintArtifacts: true, parameters: 'ADOP MAVEN', projectName: 'clean install -DskipTests'])
-				archiveArtifacts '**/*'
+				
+				withMaven(
+					// Maven installation declared in the Jenkins "Global Tool Configuration"
+					maven: 'M3',
+					// Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+					// Maven settings and global settings can also be defined in Jenkins Global Tools Configuration
+					mavenLocalRepo: '.m2/repository') {
+								// Run the maven build
+								sh "mvn clean install"
+					}
+
             }
         }
         stage('Unit & Mutation Test') {
