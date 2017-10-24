@@ -45,11 +45,11 @@ pipeline {
 					  fi
 					  echo "Application is not up yet. Retrying ..Attempt (COUNT)"
 					  sleep 5
-					  COUNT=((COUNT+1))
+					  COUNT=COUNT+1
 					done
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					echo "Environment URL (replace PUBLIC_IP with your public ip address where you access jenkins from) : http://SERVICE_NAME}.PUBLIC_IP.xip.io/petclinic"
+					echo "Environment URL (replace PUBLIC_IP with your public ip address where you access jenkins from) : http://SERVICE_NAME.PUBLIC_IP.xip.io/petclinic"
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 
