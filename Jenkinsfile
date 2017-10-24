@@ -1,18 +1,14 @@
-
 pipeline {
-    agent { docker 'maven:3.3.3' }
-
+    agent any
+	environment {
+        WORKSPACE_NAME = 'ana'
+        PROJECT_NAME = 'hola'
+    }
     stages {
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
-				environment {
-					workspaceFolderName = 'WORKSPACE_NAME'
-					projectFolderName = 'PROJECT_NAME'
-				}
-				step([$class: 'CopyArtifact', fingerprintArtifacts: true, parameters: 'ADOP MAVEN', projectName: 'clean install -DskipTests'])
-
-
+				
             }
         }
         stage('Unit & Mutation Test') {
