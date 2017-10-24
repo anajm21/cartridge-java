@@ -24,11 +24,7 @@ pipeline {
         stage('Code Inspection') {
             steps {
                 withSonarQubeEnv('sonar_ana') {
-				properties('''sonar.projectKey=PROJECT_NAME_KEY
-				sonar.projectName=PROJECT_NAME
-				sonar.projectVersion=6.2
-				sonar.language=java
-				sonar.scm.enabled=false''')
+					sh './mvnw sonar:sonar'
     
 				}
 
