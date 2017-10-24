@@ -9,7 +9,7 @@ pipeline {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
 				
-				withMaven(
+				tool(
 					// Maven installation declared in the Jenkins "Global Tool Configuration"
 					maven: 'M3',
 					// Maven settings.xml file defined with the Jenkins Config File Provider Plugin
