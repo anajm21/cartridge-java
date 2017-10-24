@@ -8,9 +8,7 @@ pipeline {
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
-				node {
-					label 'java8'
-				}
+				node ('master')
 				step([$class: 'CopyArtifact', fingerprintArtifacts: true, parameters: 'ADOP MAVEN', projectName: 'clean install -DskipTests'])
 				archiveArtifacts '**/*'
             }
