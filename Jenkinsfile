@@ -4,16 +4,14 @@ pipeline {
         WORKSPACE_NAME = 'ana'
         PROJECT_NAME = 'hola'
     }
-	
 	tools {
-		maven 'M3'
-		maven "clean install -DskipTests"				
+		maven 'M3'		
 	}
     stages {
-		
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
+				sh "mvn clean install -DskipTests"		
             }
         }
         stage('Unit & Mutation Test') {
