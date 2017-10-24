@@ -4,10 +4,12 @@ pipeline {
         WORKSPACE_NAME = 'ana'
         PROJECT_NAME = 'hola'
     }
-    stages {
-		tools {
+	
+	tools {
 			maven 'M3'
 		}
+    stages {
+		
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
