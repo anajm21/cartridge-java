@@ -62,7 +62,15 @@ pipeline {
         }
 		stage('InTegration & Security Test') {
             steps {
-                echo 'Deploying....'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
+				sh'''
+				echo "hola"
+				
+				
+				
+				
+				
+				'''
             }
         }
 		stage('Performance Test') {
