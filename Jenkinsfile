@@ -39,7 +39,7 @@ pipeline {
             steps {
 			        
 					sh ''' 
-					docker cp ./target/petclinic.war tomcat:/usr/local/tomcat/webapps/
+					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
 					COUNT=1
 					while ! curl -q http://34.251.50.161:8888/petclinic -o /dev/null
@@ -50,7 +50,7 @@ pipeline {
 					  fi
 					  echo "Application is not up yet. Retrying ..Attempt (COUNT)"
 					  sleep 5
-					  COUNT=((COUNT+1))
+					  #COUNT=((COUNT+1))
 					  done
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
