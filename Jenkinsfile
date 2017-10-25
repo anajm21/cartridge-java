@@ -26,7 +26,7 @@ pipeline {
         stage('Code Inspection') {
             steps {
                 withSonarQubeEnv('sonar_ana') {
-					sh './mvnw sonar:sonar'
+					//sh './mvnw sonar:sonar'
 					sh 'echo hola'
     
 				}
@@ -50,7 +50,7 @@ pipeline {
 					  fi
 					  echo "Application is not up yet. Retrying ..Attempt (COUNT)"
 					  sleep 5
-					  #COUNT=((COUNT+1))
+					  COUNT=COUNT+1
 					  done
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
