@@ -39,7 +39,7 @@ pipeline {
             steps {
 			        
 					sh ''' 
-					docker ps
+					echo env.WORKSPACE
 					'''
             }
         }
