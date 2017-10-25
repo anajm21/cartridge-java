@@ -8,8 +8,8 @@ pipeline {
 
 	tools {
 		maven 'M3'
-		org.jenkinsci.plugins.docker.commons.tools.DockerTool 'docker'
 	}
+	
     stages {
         stage('Build & Package') {
             steps {
@@ -32,7 +32,12 @@ pipeline {
             }
         }
 		stage('Provision & Deploy to Test') {
+		
+			
             steps {
+			        withDockerContainer(image: 'adop-jenkins-slave', toolName: 'docker') {
+						docker version
+					}
 					sh ''' 
 					export SERVICE_NAME="(echo PROJECT_NAME | tr '/' '_')_ENVIRONMENT_NAME"
 					docker cp WORKSPACE/target/petclinic.war  SERVICE_NAME:/usr/local/tomcat/webapps/
