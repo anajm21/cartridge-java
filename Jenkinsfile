@@ -67,7 +67,8 @@ pipeline {
 				echo "tomcat" > env.properties
 				echo "Running automation tests"
 				echo "Setting values for container, project and app names"
-				
+				CONTAINER_NAME="owasp_zap-"tomcat
+				echo CONTAINER_NAME
 				'''
             }
         }
