@@ -1,5 +1,5 @@
 pipeline {
-    agent {swarm}
+    agent {label 'swarm'}
 	environment {
         WORKSPACE_NAME = 'ana'
         PROJECT_NAME = 'projectFolderName'
