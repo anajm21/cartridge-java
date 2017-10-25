@@ -14,12 +14,12 @@ pipeline {
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
-				sh "mvn clean install -DskipTests"		
+				sh "./mvnw clean install -DskipTests"		
             }
         }
         stage('Unit & Mutation Test') {
             steps {
-				sh "mvn surefire:test"
+				sh "./mvnw surefire:test"
             }
         }
         stage('Code Inspection') {
@@ -35,8 +35,8 @@ pipeline {
 		
 			
             steps {
-			        withDockerContainer(image: 'adop-jenkins-slave', toolName: 'docker') {
-						docker version
+			        withDockerContainer(image: 'adop-jenkins-slave:0.1.4', toolName: 'docker') {
+						sh 'docker version'
 					}
 					/*sh ''' 
 					export SERVICE_NAME="(echo PROJECT_NAME | tr '/' '_')_ENVIRONMENT_NAME"
