@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent swarm
 	environment {
         WORKSPACE_NAME = 'ana'
         PROJECT_NAME = 'projectFolderName'
@@ -37,10 +37,8 @@ pipeline {
 		
 			
             steps {
-			        withDockerContainer(image: 'adop-jenkins-slave:0.1.4', toolName: 'docker') {
-						sh 'docker version'
-					}
-					/*sh ''' 
+			        
+					sh ''' 
 					export SERVICE_NAME="(echo PROJECT_NAME | tr '/' '_')_ENVIRONMENT_NAME"
 					docker cp WORKSPACE/target/petclinic.war  SERVICE_NAME:/usr/local/tomcat/webapps/
 					docker restart SERVICE_NAME
@@ -61,7 +59,7 @@ pipeline {
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 
-					'''*/
+					'''
             }
         }
 		stage('InTegration & Security Test') {
