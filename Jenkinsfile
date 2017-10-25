@@ -64,11 +64,9 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
 				sh'''
-				echo "hola"
-				
-				
-				
-				
+				echo "tomcat" > env.properties
+				echo "Running automation tests"
+				echo "Setting values for container, project and app names"
 				
 				'''
             }
