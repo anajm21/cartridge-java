@@ -8,7 +8,7 @@ pipeline {
 
 	tools {
 		maven 'M3'
-		docker 'docker'
+		org.jenkinsci.plugins.docker.commons.tools.DockerTool 'docker'
 	}
     stages {
         stage('Build & Package') {
