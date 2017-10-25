@@ -44,13 +44,13 @@ pipeline {
 					COUNT=1
 					while ! curl -q http://34.251.50.161:8888/petclinic -o /dev/null
 					do
-					  if [ COUNT -gt 10 ]; then
-						echo "Docker build failed even after COUNT. Please investigate."
+					  if [ ${COUNT} -gt 10 ]; then
+						echo "Docker build failed even after ${COUNT}. Please investigate."
 						exit 1
 					  fi
-					  echo "Application is not up yet. Retrying ..Attempt (COUNT)"
+					  echo "Application is not up yet. Retrying ..Attempt (${COUNT})"
 					  sleep 5
-					  COUNT=COUNT+1
+					  COUNT=((${COUNT}+1))
 					  done
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
