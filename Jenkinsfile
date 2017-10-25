@@ -14,18 +14,20 @@ pipeline {
         stage('Build & Package') {
             steps {
                 git 'https://github.com/Accenture/spring-petclinic.git'
-				sh "./mvnw clean install -DskipTests"		
+				//sh "./mvnw clean install -DskipTests"		
             }
         }
         stage('Unit & Mutation Test') {
             steps {
-				sh "./mvnw surefire:test"
+				//sh "./mvnw surefire:test"
+				sh 'echo hola'
             }
         }
         stage('Code Inspection') {
             steps {
                 withSonarQubeEnv('sonar_ana') {
-					sh './mvnw sonar:sonar'
+					//sh './mvnw sonar:sonar'
+					sh 'echo hola'
     
 				}
 
