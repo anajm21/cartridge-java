@@ -90,10 +90,11 @@ pipeline {
 				mvn -f src/test/gatling/pom.xml gatling:execute
     	
 				'''
+				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '${WORKSPACE}/src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
 
             }
 			
-			publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '${WORKSPACE}/src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
+			
         }
 		stage('Provision & Deploy to Prod') {
             steps {
