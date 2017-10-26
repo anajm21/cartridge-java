@@ -90,7 +90,7 @@ pipeline {
 		
 				ls -l apache-jmeter-2.13
 			
-				ant -buildfile -Dtestpath="src/test/jmeter" -Dtest="petclinic_test_plan"   'apache-jmeter-2.13/extras/build.xml'
+				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=src/test/jmeter -Dtest=petclinic_test_plan
 				'''
 
             }
