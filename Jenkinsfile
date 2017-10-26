@@ -4,6 +4,7 @@ pipeline {
         WORKSPACE_NAME = 'ana'
         PROJECT_NAME = 'projectFolderName'
         PROJECT_NAME_KEY = 'projectNameKey'
+		WORKSPACE='workspace'
     }
 
 	tools {
@@ -87,10 +88,9 @@ pipeline {
 					sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
 					sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
 				fi
-		
-				ls -l apache-jmeter-2.13
+	
 			
-				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=/workspace/java-cartridge/src/test/jmeter -Dtest=petclinic_test_plan
+				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/src/test/jmeter -Dtest=petclinic_test_plan
 				'''
 
             }
