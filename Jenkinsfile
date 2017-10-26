@@ -89,11 +89,6 @@ pipeline {
 				export test="petclinic_test_plan"
 				ant 'apache-jmeter-2.13/extras/build.xml'
 				'''
-				
-				withAnt {
-					testpath='src/test/jmeter'
-					test='petclinic_test_plan'
-				}
 
             }
         }
