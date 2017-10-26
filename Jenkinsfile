@@ -87,7 +87,7 @@ pipeline {
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				
-				mvn -f src/test/garling/pom.xml gatling:execute
+				mvn -f src/test/gatling/pom.xml gatling:execute
     	
 				'''
 
