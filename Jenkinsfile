@@ -85,8 +85,8 @@ pipeline {
 					sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
 				fi
 				
-				export 'testpath'='src/test/jmeter'
-				export 'test'='petclinic_test_plan'
+				export testpath="src/test/jmeter"
+				export test="petclinic_test_plan"
 				ant 'apache-jmeter-2.13/extras/build.xml'
 				'''
 				
