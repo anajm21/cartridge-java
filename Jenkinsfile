@@ -4,7 +4,7 @@ pipeline {
         WORKSPACE_NAME = 'ana'
         PROJECT_NAME = 'projectFolderName'
         PROJECT_NAME_KEY = 'projectNameKey'
-		WORKSPACE='workspace'
+		
     }
 
 	tools {
