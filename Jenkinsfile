@@ -8,6 +8,7 @@ pipeline {
 
 	tools {
 		maven 'M3'
+		ant 'AntApache'
 	}
 	
     stages {
@@ -83,7 +84,17 @@ pipeline {
 					sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
 					sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
 				fi
+				
+				export 'testpath'='src/test/jmeter'
+				export 'test'='petclinic_test_plan'
+				ant 'apache-jmeter-2.13/extras/build.xml'
 				'''
+				
+				withAnt {
+					testpath='src/test/jmeter'
+					test='petclinic_test_plan'
+				}
+
             }
         }
 		stage('Provision & Deploy to Prod') {
