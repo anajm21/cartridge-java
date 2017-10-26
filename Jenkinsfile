@@ -63,7 +63,7 @@ pipeline {
 		stage('InTegration & Security Test') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
-     			sh "./mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://http://34.251.50.161:8080/petclinic -DZAP_ENABLED='false'"
+     			sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://http://34.251.50.161:8080/petclinic -DZAP_ENABLED='false'"
             }
         }
 		stage('Performance Test') {
