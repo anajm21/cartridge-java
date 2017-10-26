@@ -63,13 +63,7 @@ pipeline {
 		stage('InTegration & Security Test') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
-				sh'''
-				echo "tomcat" > env.properties
-				echo "Running automation tests"
-				echo "Setting values for container, project and app names"
-				CONTAINER_NAME="owasp_zap-"tomcat
-				echo CONTAINER_NAME
-				'''
+				sh ./mvnw -f regression-tests/pom.xml 'clean -B test -DPETCLINIC_URL=http://172.17.0.1:8080/petclinic -DZAP_ENABLED="false"'
             }
         }
 		stage('Performance Test') {
