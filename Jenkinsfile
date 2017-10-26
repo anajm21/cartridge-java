@@ -72,25 +72,17 @@ pipeline {
 		stage('Performance Test') {
             steps {
                 sh '''
-				/*if [ -e apache-jmeter-2.13.tgz ]; then
-					tar -xf apache-jmeter-2.13.tgz
-			  	 	echo 'Changing user defined parameters for jmx file'
-			 		sed -i 's/PETCLINIC_HOST_VALUE/34.251.50.161/g' src/test/jmeter/petclinic_test_plan.jmx
-					sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
-					sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
-					sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
-            	else
-            		wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
-			    	tar -xf apache-jmeter-2.13.tgz
-            	 	echo 'Changing user defined parameters for jmx file'
-					sed -i 's/PETCLINIC_HOST_VALUE/34.251.50.161/g' src/test/jmeter/petclinic_test_plan.jmx
-					sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
-					sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
-					sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
+				if [ ! -e apache-jmeter-2.13.tgz ]; then
+					wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
 				fi
-
-				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/src/test/jmeter -Dtest=petclinic_test_plan
-				
+				tar -xf apache-jmeter-2.13.tgz
+				echo 'Changing user defined parameters for jmx file'
+				sed -i 's/PETCLINIC_HOST_VALUE/34.251.50.161/g' src/test/jmeter/petclinic_test_plan.jmx
+				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
+				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
+				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
+            	
+				#ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/src/test/jmeter -Dtest=petclinic_test_plan
 				
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
