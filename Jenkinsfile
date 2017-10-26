@@ -29,6 +29,7 @@ pipeline {
                 withSonarQubeEnv('sonar_ana') {
 					//sh './mvnw sonar:sonar'
 					sh 'echo hola'
+					
     
 				}
 
@@ -57,12 +58,14 @@ pipeline {
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					'''*/
+					sh 'echo hola'
             }
         }
 		stage('InTegration & Security Test') {
             steps {
                 //checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
      			//sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://34.251.50.161:8888/petclinic -DZAP_ENABLED='false'"
+				sh 'echo hola'
             }
         }
 		stage('Performance Test') {
