@@ -72,7 +72,7 @@ pipeline {
 		stage('Performance Test') {
             steps {
                 sh '''
-				if [ -e apache-jmeter-2.13.tgz ]; then
+				/*if [ -e apache-jmeter-2.13.tgz ]; then
 					tar -xf apache-jmeter-2.13.tgz
 			  	 	echo 'Changing user defined parameters for jmx file'
 			 		sed -i 's/PETCLINIC_HOST_VALUE/34.251.50.161/g' src/test/jmeter/petclinic_test_plan.jmx
@@ -90,10 +90,12 @@ pipeline {
 				fi
 
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/src/test/jmeter -Dtest=petclinic_test_plan
-				ls java-cartridge
 				
-				#sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
-				#sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
+				
+				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
+				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
+				
+				mvn -f src/test/garling/pom.xml gatling:execute
     	
 				'''
 
