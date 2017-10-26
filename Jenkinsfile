@@ -37,7 +37,7 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 			        
-					sh ''' 
+					/*sh ''' 
 					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
 					COUNT=1
@@ -56,13 +56,13 @@ pipeline {
 					echo "Environment URL (replace PUBLIC_IP with your public ip address where you access jenkins from) : http://34.251.50.161:8888/petclinic"
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					'''
+					'''*/
             }
         }
 		stage('InTegration & Security Test') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
-     			sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://34.251.50.161:8888/petclinic -DZAP_ENABLED='false'"
+                //checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
+     			//sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://34.251.50.161:8888/petclinic -DZAP_ENABLED='false'"
             }
         }
 		stage('Performance Test') {
@@ -88,7 +88,7 @@ pipeline {
 				ls -l apache-jmeter-2.13
 				export testpath="src/test/jmeter"
 				export test="petclinic_test_plan"
-				ant 'apache-jmeter-2.13/extras/build.xml'
+				ant -buildfile 'apache-jmeter-2.13/extras/build.xml'
 				'''
 
             }
