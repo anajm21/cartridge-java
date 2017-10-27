@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Build & Package') {
             steps {
-                git 'https://github.com/Accenture/spring-petclinic.git'
+                git 'https://github.com/anajm21/adop-cartridge-java-regression-tests.git'
 				sh "./mvnw clean install -DskipTests"		
             }
         }
@@ -97,12 +97,17 @@ pipeline {
 			
 			
         }
-		stage('Provision & Deploy to Prod') {
+		stage('Provision & Deploy to ProdA') {
             steps {
                 echo 'Deploying....'
             }
         }
+		stage('Provision & Doploy to ProdB'){
+			steps {
+				echo 'Deploying...'
 		
+			}
+		}
 		
-    }
+	}
 }
