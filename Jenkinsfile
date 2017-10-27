@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Build & Package') {
             steps {
-                git 'https://github.com/anajm21/adop-cartridge-java-regression-tests.git'
+                git 'https://github.com/anajm21/spring-petclinic.git'
 				sh "./mvnw clean install -DskipTests"		
             }
         }
@@ -64,8 +64,8 @@ pipeline {
         }
 		stage('InTegration & Security Test') {
             steps {
-                //checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Accenture/adop-cartridge-java-regression-tests.git']]])
-     			//sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://34.251.50.161:8888/petclinic -DZAP_ENABLED='false'"
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/anajm/adop-cartridge-java-regression-tests.git']]])
+     			sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B test -DPETCLINIC_URL=http://34.251.50.161:8888/petclinic -DZAP_ENABLED='false'"
 				sh 'echo hola'
             }
         }
@@ -82,16 +82,16 @@ pipeline {
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jmx
             	
-				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/src/test/jmeter -Dtest=petclinic_test_plan
+				#ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/src/test/jmeter -Dtest=petclinic_test_plan
 				
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				
-				mvn -f src/test/gatling/pom.xml gatling:execute
+				#mvn -f src/test/gatling/pom.xml gatling:execute
     	
 				'''
-				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
-				gatlingArchive()
+				//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
+				//gatlingArchive()
 
             }
 			
