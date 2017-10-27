@@ -91,6 +91,7 @@ pipeline {
     	
 				'''
 				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
+				gatlingArchive(io.gatling.jenkins.GatlingPublisher)
 
             }
 			
