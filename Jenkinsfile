@@ -71,7 +71,9 @@ pipeline {
         }
 		stage('Performance Test') {
             steps {
-                sh '''
+				
+				echo 'Test'
+                /*sh '''
 				if [ ! -e apache-jmeter-2.13.tgz ]; then
 					wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
 				fi
@@ -87,9 +89,9 @@ pipeline {
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				
-				#mvn -f src/test/gatling/pom.xml gatling:execute
+				mvn -f src/test/gatling/pom.xml gatling:execute
     	
-				'''
+				'''*/
 				//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
 				//gatlingArchive()
 
