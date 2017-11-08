@@ -72,7 +72,7 @@ pipeline {
 		stage('Performance Test') {
             steps {
 				
-				echo 'Test'
+				echo 'Testtt'
                 /*sh '''
 				if [ ! -e apache-jmeter-2.13.tgz ]; then
 					wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
