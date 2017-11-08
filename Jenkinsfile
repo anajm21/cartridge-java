@@ -66,6 +66,8 @@ pipeline {
             steps {
                 //checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'adop-cartridge-java-regression-tests']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/anajm21/adop-cartridge-java-regression-tests.git']]])
      			//sh "mvn -f adop-cartridge-java-regression-tests/pom.xml clean -B prepare-package -DPETCLINIC_URL=http://34.251.50.161:8888/petclinic -DZAP_ENABLED=false -DZAP_HOST=34.251.50.161"
+				
+				sh 'echo hola'
             }
         }
 		stage('Performance Test') {
