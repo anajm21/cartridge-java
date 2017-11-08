@@ -92,8 +92,9 @@ pipeline {
 				
     	
 				'''*/
-				mvn jmeter:jmeter
-				mvn -f src/test/gatling/pom.xml gatling:execute
+				sh "mvn jmeter:jmeter"
+				sh "mvn -f src/test/gatling/pom.xml gatling:execute"
+				
 				//publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
 				//gatlingArchive()
 
