@@ -73,11 +73,11 @@ pipeline {
             steps {
 				
 				echo 'Testtt'
-                /*sh '''
-				if [ ! -e apache-jmeter-2.13.tgz ]; then
-					wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
-				fi
-				tar -xf apache-jmeter-2.13.tgz
+                sh '''
+				#if [ ! -e apache-jmeter-2.13.tgz ]; then
+					#wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
+				#fi
+				#tar -xf apache-jmeter-2.13.tgz
 				echo 'Changing user defined parameters for jmx file'
 				sed -i 's/PETCLINIC_HOST_VALUE/34.251.50.161/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
@@ -91,7 +91,7 @@ pipeline {
 				
 				
     	
-				'''*/
+				'''
 				sh "mvn verify"
 				sh "mvn -f src/test/gatling/pom.xml gatling:execute"
 				
