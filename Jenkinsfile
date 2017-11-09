@@ -34,28 +34,9 @@ pipeline {
         }
 		stage('Provision & Deploy to Test') {
             steps {
-			        sh '''
-					docker run -it --name tomcat -v tomcat:/usr/local/tomcat tomcat:9.0
-					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
-					docker restart tomcat
-					COUNT=1
-					while ! curl -q http://34.251.50.161:8888/petclinic -o /dev/null
-					do
-					  if [ ${COUNT} -gt 10 ]; then
-						echo "Docker build failed even after ${COUNT}. Please investigate."
-						exit 1
-					  fi
-					  echo "Application is not up yet. Retrying ..Attempt (${COUNT})"
-					  sleep 5
-					  COUNT=$((COUNT+1))
-					  done
-					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					echo "Environment URL (replace PUBLIC_IP with your public ip address where you access jenkins from) : http://34.251.50.161:8888/petclinic"
-					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					'''
 					
+					def image =docker.build ("tomcat:9.0")
+					image.push()
 					/*sh ''' 
 					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
