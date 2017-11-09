@@ -27,7 +27,8 @@ pipeline {
         stage('Code Inspection') {
             steps {
                 withSonarQubeEnv('sonar_ana') {
-					sh './mvnw sonar:sonar'	
+					//sh './mvnw sonar:sonar'	
+					sh "echo hola"
 				}
 
             }
@@ -35,7 +36,7 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 					
-					sh "docker run -it tomcat:9.0"
+					sh "docker run tomcat:9.0"
 					/*sh ''' 
 					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
