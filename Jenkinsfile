@@ -35,7 +35,7 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 					
-					docker run -it tomcat:9.0
+					sh "docker run -it tomcat:9.0"
 					/*sh ''' 
 					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
