@@ -35,7 +35,7 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 			        sh '''
-					docker run -it --name tomcat -p 8888:8080 -v tomcat:/usr/local/tomcat tomcat:9.0
+					docker run -it --name tomcat -v tomcat:/usr/local/tomcat tomcat:9.0
 					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
 					COUNT=1
