@@ -35,8 +35,7 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 					
-					def image =docker.build ("tomcat:9.0")
-					image.push()
+					docker run -it --rm tomcat:9.0
 					/*sh ''' 
 					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
 					docker restart tomcat
