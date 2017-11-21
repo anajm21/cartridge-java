@@ -82,6 +82,7 @@ pipeline {
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				
 				mvn clean verify
+				mvn pre-site
 				mvn -f src/test/gatling/pom.xml gatling:execute
 				'''
 				
