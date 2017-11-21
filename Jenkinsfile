@@ -88,8 +88,8 @@ pipeline {
 				archiveArtifacts '/workspace/java-cartridge/target/jmeter/results/'
 				gatlingArchive()
 				
-				docker rm -f tomcat
-
+				sh 'docker rm -f tomcat'
+			
             }
 			
 			
