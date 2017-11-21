@@ -81,12 +81,12 @@ pipeline {
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/34.251.50.161:8888/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				
-				mvn clean verify
-				mvn pre-site
+				mvn verify
+				
 				mvn -f src/test/gatling/pom.xml gatling:execute
 				'''
 				
-				//archiveArtifacts 'target/jmeter/results/20171121-petclinic_test_plan.csv'
+				perfReport '**/*.jtl'
 				gatlingArchive()
 				
 				sh 'docker rm -f tomcat'
