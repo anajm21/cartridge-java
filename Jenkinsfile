@@ -35,16 +35,15 @@ pipeline {
         }
 		stage('Provision & Deploy to Test') {
             steps {
-					sh ''' 
-					ls
+					/*sh ''' 
 					docker build -t tomcat .
-					docker run -d -p 8888:8080 tomcat
+					docker run -d --name tomcat -p 8888:8080 tomcat
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "Environment URL (replace PUBLIC_IP with your public ip address where you access jenkins from) : http://34.251.50.161:8888/petclinic"
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
-					'''
+					'''*/
             }
         }
 		stage('InTegration & Security Test') {
@@ -77,13 +76,14 @@ pipeline {
 				//gatlingArchive()
 				
 				sh 'echo hola'
-					
-		
 			
             }
 			
 			
         }
+		
+		
+		
 		stage('Provision & Deploy to ProdA') {
             steps {
                 echo 'Deploying....'
@@ -93,6 +93,12 @@ pipeline {
 			steps {
 				echo 'Deploying...'
 		
+			}
+		}
+		
+		post { 
+        always { 
+            sh "docker rm -f tomcat"
 			}
 		}
 		
