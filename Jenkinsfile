@@ -85,7 +85,7 @@ pipeline {
 				mvn -f src/test/gatling/pom.xml gatling:execute
 				'''
 				
-				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'src/test/jmeter/', reportFiles: 'petclinic_test_plan.html', reportName: 'Jmeter Report', reportTitles: ''])
+				archiveArtifacts '/workspace/java-cartridge/target/jmeter/results/'
 				gatlingArchive()
 
             }
