@@ -20,13 +20,15 @@ pipeline {
         }
         stage('Unit & Mutation Test') {
             steps {
-				sh "./mvnw surefire:test"	
+				//sh "./mvnw surefire:test"	
+				sh 'echo hola'
             }
         }
         stage('Code Inspection') {
             steps {
                 withSonarQubeEnv('sonar_ana') {
-					sh "./mvnw sonar:sonar"	
+					//sh "./mvnw sonar:sonar"	
+					sh 'echo hola'
 				}
 
             }
@@ -34,8 +36,8 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 					sh ''' 
-					docker run -it -d --name tomcat -p 8888:8080 -v tomcat:/usr/local/tomcat tomcat:9.0
-					docker cp target/petclinic.war tomcat:/usr/local/tomcat/webapps/
+					docker build -t tomcat -f Dockerfile .
+					docker run -d -p 8888:8080 tomcat
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
 					echo "Environment URL (replace PUBLIC_IP with your public ip address where you access jenkins from) : http://34.251.50.161:8888/petclinic"
@@ -54,7 +56,7 @@ pipeline {
         }
 		stage('Performance Test') {
             steps {	
-				sh '''
+				/*sh '''
 				echo 'Changing user defined parameters for jmx file'
 				sed -i 's/PETCLINIC_HOST_VALUE/34.251.50.161/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
@@ -67,14 +69,15 @@ pipeline {
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				
 				mvn verify
-				
 				mvn -f src/test/gatling/pom.xml gatling:execute
-				'''
+				'''*/
 				
-				perfReport '**/*.jtl'
-				gatlingArchive()
+				//perfReport '**/*.jtl'
+				//gatlingArchive()
 				
-				sh 'docker rm -f tomcat'
+				sh 'echo hola'
+					
+		
 			
             }
 			
