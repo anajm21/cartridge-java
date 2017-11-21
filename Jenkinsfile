@@ -85,7 +85,7 @@ pipeline {
 				mvn -f src/test/gatling/pom.xml gatling:execute
 				'''
 				
-				archiveArtifacts '/workspace/java-cartridge/target/jmeter/results/'
+				archiveArtifacts '/workspace/java-cartridge/target/jmeter/results/*'
 				gatlingArchive()
 				
 				sh 'docker rm -f tomcat'
