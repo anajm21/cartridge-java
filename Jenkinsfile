@@ -36,6 +36,7 @@ pipeline {
 		stage('Provision & Deploy to Test') {
             steps {
 					sh ''' 
+					ls
 					docker build -t tomcat .
 					docker run -d -p 8888:8080 tomcat
 					echo "=.=.=.=.=.=.=.=.=.=.=.=."
