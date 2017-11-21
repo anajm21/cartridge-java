@@ -9,7 +9,6 @@ pipeline {
 
 	tools {
 		maven 'M3'
-		ant 'AntApache'
 	}
 	
     stages {
@@ -27,8 +26,7 @@ pipeline {
         stage('Code Inspection') {
             steps {
                 withSonarQubeEnv('sonar_ana') {
-					//sh './mvnw sonar:sonar'	
-					sh "echo hola"
+					sh "./mvnw sonar:sonar"	
 				}
 
             }
